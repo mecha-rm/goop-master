@@ -1,0 +1,17 @@
+﻿  Logging.cpp
+  Sys.cpp
+  Camera.cpp
+  FontRenderer.cpp
+  GLFWInput.cpp
+  GraphicsUtils.cpp
+C:\Users\roder\source\year 2 repos\goop-master\modules\toolkit\src\TTK\GraphicsUtils.cpp(154,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\roder\source\year 2 repos\goop-master\modules\toolkit\src\TTK\GraphicsUtils.cpp(154,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\roder\source\year 2 repos\goop-master\modules\toolkit\src\TTK\GraphicsUtils.cpp(195,1): warning C4996: 'TTK::Graphics::DrawVector': lineWidth is no longer a supported parameter, see overloads without lineWidth
+C:\Users\roder\source\year 2 repos\goop-master\modules\toolkit\src\TTK\GraphicsUtils.cpp(186): message : see declaration of 'TTK::Graphics::DrawVector'
+  Input.cpp
+  MeshHelper.cpp
+  SpriteSheetQuad.cpp
+  TTKContext.cpp
+  Texture2D.cpp
+  Generating Code...
+  toolkit.vcxproj -> C:\Users\roder\source\year 2 repos\goop-master\modules\toolkit\bin\Debug-windows-x86_64\toolkit\toolkit.lib
