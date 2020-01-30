@@ -1,45 +1,4 @@
-﻿  Camera.cpp
-  Game.cpp
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(166,57): warning C4244: 'return': conversion from 'const T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(169,58): warning C4244: 'return': conversion from 'const T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(807,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(875,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(875,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(894,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Game.cpp(900,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  main.cpp
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\main.cpp(21,21): warning C4244: 'argument': conversion from '__int64' to 'long', possible loss of data
-  Material.cpp
-  Mesh.cpp
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Mesh.cpp(74,70): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Mesh.cpp(80,46): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  MeshRenderer.cpp
-  Object.cpp
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(36,46): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(36,41): warning C4244: 'initializing': conversion from 'double' to 'const unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(39,45): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(39,40): warning C4244: 'initializing': conversion from 'double' to 'const unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(119,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(285,36): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\objects\Object.cpp(295,35): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Scene.cpp
-  SceneManager.cpp
-  Shader.cpp
-  Texture2D.cpp
-  TextureCube.cpp
-  TextureSampler.cpp
-  Utils.cpp
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Utils.cpp(74,72): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\src\Utils.cpp(74,101): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Generating Code...
+﻿  AudioEngine.cpp
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   GSD - ASN01.vcxproj -> C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\..\..\bin\Debug-windows-x86_64\GSD - ASN01\GSD - ASN01.exe
   2 File(s) copied
