@@ -246,7 +246,9 @@ void AudioEngine::SetEventPosition(const std::string& strEventName, const glm::v
 	newAttributes.position = VectorToFmod(vPosition);
 
 	// set new attribute on event
-	AudioEngine::ErrorCheck(tFoundIt->second->get3DAttributes(&newAttributes));
+	AudioEngine::ErrorCheck(tFoundIt->second->set3DAttributes(&newAttributes));
+
+	// all fmod functions return a resul
 }
 
 // setting hte velocity
@@ -289,6 +291,12 @@ float AudioEngine::dbToVolume(float db)
 float AudioEngine::VolumeTodb(float volume)
 {
 	return 20.0f * log10f(volume);
+}
+
+void AudioEngine::SetGlobalParameter(const std::string& strParameterName, float fValue)
+{
+	AudioEngine::ErrorCheck(implementation->mpStudioSystem->setParameterByName(strParameterName.c_str(), fValue));
+
 }
 
 int AudioEngine::ErrorCheck(FMOD_RESULT result)

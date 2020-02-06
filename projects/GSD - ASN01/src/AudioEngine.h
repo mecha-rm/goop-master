@@ -85,4 +85,5 @@ public:
 	float dbToVolume(float db);
 	float VolumeTodb(float volume);
 	FMOD_VECTOR VectorToFmod(const glm::vec3& vPosition);
+	void SetGlobalParameter(const std::string& strParameterName, float fValue);
 };

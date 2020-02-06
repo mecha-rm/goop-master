@@ -130,8 +130,8 @@ int main() {
 	audioEngine.PlayEvent("Music");
 
 	//// Make some Vectors to use
-	glm::vec3 startPosition = { 100, 100, 100 }; // close position
-	glm::vec3 endPosition = { -100, -100, -100 }; // far position
+	glm::vec3 startPosition = { 3, 3, 3 }; // close position
+	glm::vec3 endPosition = { -3, -3, -3 }; // far position
 
 	glm::vec3 leftVelocity = {-10, 0, 0};
 	glm::vec3 rightVelocity = { 10, 0, 0 };

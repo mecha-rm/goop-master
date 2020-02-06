@@ -1,3 +1,7 @@
 **/desktop.ini
 
 .vs/
+
+obj/
+
+bin/

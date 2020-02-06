@@ -1,5 +1,0 @@
-﻿  AudioEngine.cpp
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  GSD - ASN01.vcxproj -> C:\Users\roder\source\year 2 repos\goop-master\projects\GSD - ASN01\..\..\bin\Debug-windows-x86_64\GSD - ASN01\GSD - ASN01.exe
-  2 File(s) copied
-  37 File(s) copied
