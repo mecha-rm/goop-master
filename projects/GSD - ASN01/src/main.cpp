@@ -1,6 +1,6 @@
 /* 
  * Name: Roderick "R.J." Montague
- * Date: 02/06/2020
+ * Date: 02/09/2020
  * Description: three-dimensional sound
  * References:
 	* https://glm.g-truc.net/0.9.3/api/a00199.html
@@ -63,7 +63,7 @@ void GlDebugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsi
 	}
 }
 
-// rotation on x-axis
+// rotates a vector on the x-axis
 glm::vec3 RotateX(const glm::vec3 vec, float theta, bool inDegrees)
 {
 	return glm::rotateX(vec, (inDegrees) ? glm::radians(theta) : theta);
@@ -75,58 +75,65 @@ glm::vec3 RotateY(const glm::vec3 vec, float theta, bool inDegrees)
 	return glm::rotateY(vec, (inDegrees) ? glm::radians(theta) : theta);
 }
 
-// rotation on z-axis
+// rotates a vector on the z-axis
 glm::vec3 RotateZ(const glm::vec3 vec, float theta, bool inDegrees)
 {
 	return glm::rotateZ(vec, (inDegrees) ? glm::radians(theta) : theta);
 }
 
-// returns a vector 3 as a string.
+// returns a vector3 as a string.
 std::string Vector3ToString(glm::vec3 v3)
 {
 	return "(" + std::to_string(v3.x) + ", " + std::to_string(v3.y) + ", " + std::to_string(v3.z) + ")";
 }
 
+// main loop
 int main() {
 	// ADDITIONAL VARIABLES (1)
 	// the window size
 	glm::ivec2 windowSize = glm::ivec2(800, 800);
 
-	// MOVEMENT SETUP
-	bool panMode = true; // if 'true', the project is in pan mode. If false, the project is in travel mode.
+	// Sound Variables
+	bool panMode = true; // if 'true', the project is in pan mode. If false, the project is in distance mode.
 
-	// positioning
-	glm::vec3 startPosition = { 0, 0, 4.5F }; // close position
+	// Positioning variables
+	glm::vec3 startPosition = { 0, 0, 5.0F }; // starting position
 	glm::vec3 currentPosition = startPosition; // the current position
 
-	// Panning
+	// Panning variables
 	float theta = 0.0F; // rotation in degrees
-	const float R_INC = -30.0F; // rotation incrementer in degrees
+	const float R_INC = -30.0F; // rotation incrementer in degrees (gets multiplied by delta time)
 
-	// Translation (uses LERP)
-	glm::vec3 endPosition = { 0, 0, 20.5F };
-	float t = 0.0F;
+	// Distance/Translation (uses LERP)
+	glm::vec3 endPosition = { 0, 0, 21.0F }; // ending position for the audio source
+	float t = 0.0F; // time value for LERP
+
+	// the incremeter for the lerp calculation.
+	// this is multiplied by 'delta time' so that the distance travelled is consistent across all computer systems.
 	const float T_INC = 0.5F;
-	bool forward = true; // 'true' if the entity is moving forward
 
-	// Drawing Cubes
-	// the size of the indicator
+	// 'true' if the entity is moving forward. False otherwise.
+	bool forward = true;
+
+	// Graphic Variables (Drawing Cubes)
+	// the size of the indicators (i.e. the listener and the audio source)
 	float indicatorSize = 100.0F;
 
 	// listener position and colour
-	glm::vec3 listenerPos = glm::vec3(-350.0F, 70.0F, 0.0F);
+	glm::vec3 listenerPos = glm::vec3(-400.0F, 300.0F, 0.0F);
 	glm::vec4 listenerClr = glm::vec4(1.0F, 0.0F, 0.0F, 1.0F);
 
 	// audio position and colour
 	glm::vec3 audioPos = glm::vec3(0.0F);
 	glm::vec4 audioClr = glm::vec4(0.0F, 1.0F, 0.0F, 1.0F);
 
-	// used for panning
-	glm::vec3 pDist = glm::vec3(0.0F, 150.0F, 0.0F);
+	// the distance from the listener for the moving cube graphic in panning mode.
+	glm::vec3 pDist = glm::vec3(0.0F, 225.0F, 0.0F);
 
-	// used for translation
-	glm::vec3 tEndPos = listenerPos + glm::vec3(-150.0F, 0.0F, 0.0F);
+	// the ending position for the moving cube graphic in distance mode.
+	glm::vec3 tEndPos = listenerPos + glm::vec3(0.0F, 625.0F, 0.0F);
 
+	// audio position
 	audioPos = listenerPos + pDist;
 
 	// Audio Engine
@@ -187,6 +194,10 @@ int main() {
 	yoshi.SliceSpriteSheet("yoshi.png", 1, 1, 0.5f);
 	TTK::SpriteSheetQuad* currentSprite = &mario;
 	
+	// the axes, which is getting drawn to the screen.
+	TTK::SpriteSheetQuad* axes = new TTK::SpriteSheetQuad();
+	axes->SliceSpriteSheet("GSD - ASN01 - XYZ Axes.png", 1, 1, 0.5f);
+
 	float lastFrame = glfwGetTime();
 	
 	////// Sound Stuff //////
@@ -198,17 +209,10 @@ int main() {
 	audioEngine.Init();
 
 	//// Load a bank (Use the flag FMOD_STUDIO_LOAD_BANK_NORMAL)
-	// overworld loop (Super Mario World)
-	// audioEngine.LoadBank("Overworld_Loop/Master", FMOD_STUDIO_LOAD_BANK_NORMAL);
-
 	// main loop
-	// audioEngine.LoadBank("MainLoop/Master", FMOD_STUDIO_LOAD_BANK_NORMAL);
 	audioEngine.LoadBank("Master", FMOD_STUDIO_LOAD_BANK_NORMAL);
 
 	//// Load an event
-	// overworld
-	// audioEngine.LoadEvent("Music", "{13f73348-5181-4c6b-838a-4ef9f8ad1b56}"); // Overworld_Loop
-
 	// main loop
 	audioEngine.LoadEvent("Music", "{84a26086-1e10-4505-a437-99ff0ff2a354}"); // MainLoop
 
@@ -257,7 +261,7 @@ int main() {
 				currentSprite = &mario;
 			}
 		}
-		// rotates the sound around the listener
+		// switches to 'pan' mode, which rotates the sound around the listener
 		else if (TTK::Input::GetKeyDown(TTK::KeyCode::P))
 		{
 			currentPosition = startPosition;
@@ -266,7 +270,7 @@ int main() {
 
 			audioEngine.SetEventPosition("Music", currentPosition);
 		}
-		// switching to distaince mode (the sound is get closer and further from the listener)
+		// switching to 'distance' mode, which means the sound travels towards and away from the listener.
 		else if (TTK::Input::GetKeyPressed(TTK::KeyCode::D))
 		{
 			// resetting the values
@@ -280,7 +284,7 @@ int main() {
 		// movements
 		if (panMode) // panning
 		{
-			theta += R_INC * dt;
+			theta += R_INC * dt; // rotation factor
 			currentPosition = RotateY(startPosition, theta, true); // rotation
 
 			// std::cout << "Rotation: " << theta << "\n";
@@ -288,20 +292,20 @@ int main() {
 		}
 		else // if the program is not in pan mode, it is in distance mode.
 		{
-			// changing direction
+			// changing direction if the end of hte line has been reached.
 			if (t == 1.0F)
 			{
 				t = 0.0F;
 				forward = !forward;
 			}
 
-			// t value for lerp
+			// incrementing 't'.
 			t += T_INC * dt;
 
 			// clamping the value of 't' to not go out of bounds.
 			t = glm::clamp(t, 0.0F, 1.0F);
 
-			// direction is based on if the entity is travelling forward or not.
+			// changes the direction based on if the entity is going 'forward' or not.
 			if (forward)
 				currentPosition = glm::mix(startPosition, endPosition, t);
 			else
@@ -317,7 +321,7 @@ int main() {
 		camera.update();
 		TTK::Graphics::SetCameraMatrix(camera.ViewMatrix);
 
-		// drawing the current sprite.
+		// drawing the current sprite (removed).
 		// currentSprite->Update(dt);
 		// currentSprite->Draw(
 		// 	TTK::Graphics::GetViewProjection() *
@@ -325,6 +329,12 @@ int main() {
 		// 	glm::scale(glm::mat4(1.0f), glm::vec3(100.0f, -100.0f, 1.0f))
 		// );
 		
+		// drawing the axes icon
+		axes->Draw(
+		TTK::Graphics::GetViewProjection() *
+		glm::translate(glm::mat4(1.0f), glm::vec3(-130, 775, 0.0f)) * 
+		glm::scale(glm::mat4(1.0f), glm::vec3(-100.0f, -100.0f, 1.0f)));
+
 		// drawing the listener indicator
 		TTK::Graphics::DrawCube(listenerPos, indicatorSize, listenerClr);
 
@@ -332,11 +342,12 @@ int main() {
 		if (panMode) // panning mode
 		{
 			// TTK::Graphics::DrawCube(audioPos, indicatorSize, audioClr);
-			TTK::Graphics::DrawCube(RotateZ(audioPos - listenerPos, theta, true) + listenerPos,
+			TTK::Graphics::DrawCube(RotateZ(audioPos - listenerPos, -theta, true) + listenerPos,
 				indicatorSize, audioClr);
 		}
 		else // distance mode
 		{
+			// the position isn't saved, so it must go through the calculation again.
 			if(forward)
 				TTK::Graphics::DrawCube(glm::mix(listenerPos, tEndPos, t), indicatorSize, audioClr);
 			else
